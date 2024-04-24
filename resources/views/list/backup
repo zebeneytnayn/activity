@@ -1,0 +1,34 @@
+    <script>
+$(document).ready(function() {
+    $('#form').on('submit', function(event) {
+        event.preventDefault();
+
+        var formData = $(this).serialize();
+
+        var enabled = $('#enabled').is(':checked') ? 'checked' : 'unchecked';
+        var billable = $('#billable').is(':checked') ? 'checked' : 'unchecked';
+        var purchasable = $('#purchasable').is(':checked') ? 'checked' : 'unchecked';
+        var stockable = $('#stockable').is(':checked') ? 'checked' : 'unchecked';
+
+        console.log(stockable);
+
+        // console.log('Form Data:', formData);
+        // console.log('Enabled:', enabled);
+        // console.log('Billable:', billable);
+        // console.log('Purchasable:', purchasable);
+        // console.log('Stockable:', stockable);
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('store') }}', 
+            data: formData,
+            success: function(response) {
+                console.log('Success:', response);
+            },
+            error: function(xhr, status, error) {
+                console.log('Error:', error);
+            }
+        });
+    });
+});
+</script>
